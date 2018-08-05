@@ -6,7 +6,12 @@ import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>BOILERMAKER</h1>
+    <h1>How stressed are you?!?!</h1>
+    <p>
+      Feeling down, stressed, depressed? Who needs a therapist when a computer
+      can diagnose you instead!!? Let out all your stress on the button below,
+      submit your score, and I'll calculate your stress levels! *beep* *beep*
+    </p>
     <nav>
       {isLoggedIn ? (
         <div>
