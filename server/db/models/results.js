@@ -13,6 +13,9 @@ const Result = db.define('results', {
   },
   advice: {
     type: Sequelize.TEXT
+  },
+  image: {
+    type: Sequelize.TEXT
   }
 })
 

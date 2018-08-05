@@ -7,7 +7,7 @@ import {
   Signup,
   UserHome,
   ConnectedStressClick,
-  Result
+  ConnectedResult
 } from './components'
 import {me} from './store'
 
@@ -28,7 +28,7 @@ class Routes extends Component {
         <Route path="/home" component={ConnectedStressClick} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/result" component={Result} />
+        <Route path="/result" component={ConnectedResult} />
 
         {isLoggedIn && (
           <Switch>
