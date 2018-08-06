@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import AddIcon from '@material-ui/icons/Add'
 import {getResult} from '../store/result'
+import {postScore} from '../store/user'
 
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles'
 
@@ -28,8 +29,8 @@ const theme = createMuiTheme({
 })
 
 export class UnconnectedStressClick extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       score: 0,
       result: 1
@@ -69,8 +70,16 @@ export class UnconnectedStressClick extends Component {
     })
   }
 
-  handleSubmit() {
-    this.props.getResult(this.state.result)
+  async handleSubmit() {
+    const result = await this.props.getResult(this.state.result)
+    await this.props.postScore(
+      {
+        result: result.name,
+        userId: this.props.user.id
+      },
+      this.props.user
+    )
+    console.log('done waiting')
   }
   render() {
     console.log('state', this.state)
@@ -101,10 +110,17 @@ export class UnconnectedStressClick extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  getResult: id => dispatch(getResult(id))
+const mapStateToProps = state => ({
+  result: state.result,
+  user: state.user
 })
 
-export const ConnectedStressClick = connect(null, mapDispatchToProps)(
-  UnconnectedStressClick
-)
+const mapDispatchToProps = dispatch => ({
+  getResult: id => dispatch(getResult(id)),
+  postScore: (score, user) => dispatch(postScore(score, user))
+})
+
+export const ConnectedStressClick = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UnconnectedStressClick)

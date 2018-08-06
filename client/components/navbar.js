@@ -28,7 +28,7 @@ const Navbar = ({handleClick, isLoggedIn, name}) => (
       <MuiThemeProvider theme={theme}>
         <AppBar position="static">
           <Toolbar>
-            <Link to="/home" style={{color: 'white'}}>
+            <Link to="/" style={{color: 'white'}}>
               <Button color="inherit">
                 {' '}
                 <Typography
@@ -58,6 +58,14 @@ const Navbar = ({handleClick, isLoggedIn, name}) => (
                 <Link to="/logout" style={{color: 'white'}}>
                   <Button color="inherit" onClick={handleClick}>
                     Log Out
+                  </Button>
+                </Link>
+                <Link to="/home" style={{color: 'white'}}>
+                  <Button color="inherit">
+                    {' '}
+                    <Typography variant="title" color="inherit">
+                      Home
+                    </Typography>
                   </Button>
                 </Link>
               </React.Fragment>

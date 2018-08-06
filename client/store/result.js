@@ -25,6 +25,7 @@ export const getResult = id => async dispatch => {
     const res = await axios.get(`api/results/${id}`)
     console.log('res.data is', res.data)
     dispatch(setResult(res.data))
+    return res.data
   } catch (err) {
     console.error(err)
   }

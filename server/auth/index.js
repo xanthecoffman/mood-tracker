@@ -43,8 +43,9 @@ router.post('/logout', (req, res) => {
   res.redirect('/')
 })
 
-router.get('/me', (req, res) => {
-  res.json(req.user)
+router.get('/me', async (req, res) => {
+  const user = await User.findById(req.user.id, {include: {model: Score}})
+  res.json(user)
 })
 
 router.use('/google', require('./google'))

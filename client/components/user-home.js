@@ -40,13 +40,18 @@ export class UserHome extends Component {
   }
 
   async componentDidMount() {
-    await fetchUser()
+    console.log('beforeFetch')
+    await this.props.fetchUser(this.props.user.id)
+
+    console.log('afterFetch')
+
     this.setState({
       loaded: true
     })
   }
 
   render() {
+    console.log(this.props)
     return this.props.user.scores ? (
       <div>
         <Typography>
