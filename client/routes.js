@@ -25,7 +25,7 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route path="/home" component={ConnectedStressClick} />
+        <Route exact path="/" component={ConnectedStressClick} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/result" component={ConnectedResult} />
@@ -37,7 +37,7 @@ class Routes extends Component {
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
-        <Route component={ConnectedStressClick} />
+        <Route component={UserHome} />
       </Switch>
     )
   }

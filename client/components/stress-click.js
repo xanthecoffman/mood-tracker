@@ -6,8 +6,26 @@ import Button from '@material-ui/core/Button'
 import AddIcon from '@material-ui/icons/Add'
 import {getResult} from '../store/result'
 
-const imgSrc =
-  'https://png2.kisspng.com/sh/c5756b98c29c5ec2bf3b7a3a4e16b494/L0KzQYm3U8IxN5VtfZH0aYP2gLBuTfNwdaF6jNd7LXnmf7B6TgJmbF51h950YT3nf8W0gBxqeF5miuY2cnXnPbP8lQRwdl5ue9H3LYDxd368gfIyOmQ4TKUEZEe4RXA7U8AxOGE1TqMAMkG4RYm6UsQzO2cARuJ3Zx==/kisspng-computer-icons-red-polka-dot-clip-art-red-button-icon-png-5ab1233439d755.4300000615215583242369.png'
+import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles'
+
+const theme = createMuiTheme({
+  overrides: {
+    // Name of the component ⚛️ / style sheet
+    MuiButton: {
+      // Name of the rule
+      root: {
+        // Some CSS
+        background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+        borderRadius: 3,
+        border: 0,
+        color: 'white',
+        height: 48,
+        padding: '0 30px',
+        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)'
+      }
+    }
+  }
+})
 
 export class UnconnectedStressClick extends Component {
   constructor() {
@@ -60,16 +78,18 @@ export class UnconnectedStressClick extends Component {
       <div>
         <h1>Your SCORE: {this.state.score}</h1>
         <div>
-          <Button
-            variant="fab"
-            color="secondary"
-            aria-label="Add"
-            type="submit"
-            onClick={this.handleClick}
-            style={{height: 200, width: 200}}
-          >
-            <AddIcon />
-          </Button>
+          <MuiThemeProvider theme={theme}>
+            <Button
+              variant="fab"
+              color="secondary"
+              aria-label="Add"
+              type="submit"
+              onClick={this.handleClick}
+              style={{height: 200, width: 200}}
+            >
+              <AddIcon />
+            </Button>
+          </MuiThemeProvider>
         </div>
         <div>
           <Link to={`/result`}>

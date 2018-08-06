@@ -1,11 +1,15 @@
 const User = require('./user')
 const Result = require('./results')
+const Score = require('./scores')
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
  *
  *    BlogPost.belongsTo(User)
  */
+
+Score.belongsTo(User)
+User.hasMany(Score)
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -15,5 +19,6 @@ const Result = require('./results')
  */
 module.exports = {
   User,
-  Result
+  Result,
+  Score
 }

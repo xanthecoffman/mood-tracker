@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Result} = require('../server/db/models')
+const {User, Result, Score} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -10,6 +10,17 @@ async function seed() {
   const users = await Promise.all([
     User.create({email: 'cody@email.com', password: '123'}),
     User.create({email: 'murphy@email.com', password: '123'})
+  ])
+
+  const scores = await Promise.all([
+    Score.create({result: 'Very stressed'}),
+    Score.create({result: 'Youre not okay'}),
+    Score.create({result: 'Mildy stressed'}),
+    Score.create({result: 'Mildy stressed'}),
+    Score.create({result: 'Very stressed'}),
+    Score.create({result: 'Very stressed'}),
+    Score.create({result: 'Very stressed'}),
+    Score.create({result: 'Very stressed'})
   ])
 
   const results = await Promise.all([
@@ -81,7 +92,7 @@ async function seed() {
       advice:
         'I know I said before that you dont need a therapist, but you probably do',
       image:
-        'https://www.istockphoto.com/photo/stressed-businessman-at-office-computer-pointing-gun-to-alarm-clock-gm500839678-81021121s'
+        'https://media.istockphoto.com/photos/stressed-businessman-at-office-computer-pointing-gun-to-alarm-clock-picture-id500839678'
     })
   ])
   console.log(`seeded ${users.length} users`)
