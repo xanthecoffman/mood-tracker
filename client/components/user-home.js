@@ -40,14 +40,15 @@ export class UserHome extends Component {
   }
 
   async componentDidMount() {
-    console.log('beforeFetch')
-    await this.props.fetchUser(this.props.user.id)
-
-    console.log('afterFetch')
-
     this.setState({
       loaded: true
     })
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.user.scores !== prevProps.user.scores) {
+      this.props.fetchUser(prevProps.user.id)
+    }
   }
 
   render() {
