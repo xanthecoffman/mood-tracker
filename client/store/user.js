@@ -31,22 +31,24 @@ export const me = () => async dispatch => {
   }
 }
 
-export const postScore = (score, user) => async dispatch => {
+export const fetchUser = userId => async dispatch => {
   try {
-    console.log('score being sent is:', score)
-    const res = await axios.post(`api/scores/`, {score})
-    dispatch(getUser(user))
+    // const user = await me()
+    console.log('CALLED!')
+    const res = await axios.get(`/api/users/${userId}`)
+    console.log('this is what is being set', res.data)
+    dispatch(getUser(res.data))
   } catch (err) {
     console.error(err)
   }
 }
 
-export const fetchUser = userId => async dispatch => {
+export const postScore = (score, user) => async dispatch => {
   try {
-    // const user = await me()
-    const res = await axios.get(`/user/${userId}`)
-    console.log('this is what is being set', res.data)
-    dispatch(getUser(res.data))
+    console.log('score being sent is:', score)
+    const res = await axios.post(`/api/scores/`, {score})
+    fetchUser(user.id)
+    dispatch(getUser(user))
   } catch (err) {
     console.error(err)
   }
