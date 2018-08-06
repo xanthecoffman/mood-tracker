@@ -1,10 +1,15 @@
 const router = require('express').Router()
 const User = require('../db/models/user')
+const Score = require('../db/models/scores')
+
 module.exports = router
 
 router.post('/login', async (req, res, next) => {
   try {
-    const user = await User.findOne({where: {email: req.body.email}})
+    const user = await User.findOne(
+      {where: {email: req.body.email}},
+      {include: {model: Score}}
+    )
     if (!user) {
       console.log('No such user found:', req.body.email)
       res.status(401).send('Wrong username and/or password')
@@ -38,8 +43,9 @@ router.post('/logout', (req, res) => {
   res.redirect('/')
 })
 
-router.get('/me', (req, res) => {
-  res.json(req.user)
+router.get('/me', async (req, res) => {
+  const user = await User.findById(req.user.id, {include: {model: Score}})
+  res.json(user)
 })
 
 router.use('/google', require('./google'))
